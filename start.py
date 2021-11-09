@@ -40,14 +40,14 @@ def fuck_one_dk(url):
     # 首先，我们抓取这个视频的页面
     content = myrequest(url)
     
-    # 我们从这个页面里抽几个id，用来伪造看完视频的请求。
+    # 我们从这个页面里抽几个id，用来构造看完视频的请求。
     conid = re.findall(r"var conid=\"(.+?)\";",content)[0]
     sing = re.findall(r"var sing=\"(.+?)\";",content)[0]
     vid = re.findall(r"vid:(.+?),tid:",content)[0]
     tid = re.findall(r"tid:(.+?)},function",content)[0]
     hours = re.findall(r"var hours=\"(.+?)\";",content)[0]
     
-    # 然后, 我们装模作样给它做一下页面初始化.
+    # 然后, 我们给它做一下页面初始化.
     av_sh = f'curl --location --request POST \'http://dxonline.ruc.edu.cn/index.php?s=/Index/add_videonum.html\' \
     --header \'Accept: */*\think \' \
     --header \'X-Requested-With: XMLHttpRequest\' \
@@ -58,18 +58,18 @@ def fuck_one_dk(url):
     --data-urlencode \'vid={vid}\''
     os.system(av_sh)
     
-    # 再然后，我们假装开始播放视频
+    # 再然后，我们开始播放视频
     d = myrequest(f"http://dxonline.ruc.edu.cn/index.php?s=/Videoclock/index.html&videokey={vid}&videonum=1&ct=0")
     d = json.loads(d)
     print(d)
     ct = d['data']['create_time']
     
-    # 接下来，我们假装点过了中间弹出的三次按钮
+    # 接下来，我们点中间弹出的三次按钮
     print(myrequest(f"http://dxonline.ruc.edu.cn/index.php?s=/Videoclock/index.html&videokey={vid}&videonum=2&ct={ct}"))
     print(myrequest(f"http://dxonline.ruc.edu.cn/index.php?s=/Videoclock/index.html&videokey={vid}&videonum=3&ct={ct}"))
     print(myrequest(f"http://dxonline.ruc.edu.cn/index.php?s=/Videoclock/index.html&videokey={vid}&videonum=4&ct={ct}"))
     
-    # 最后，我们假装看完了
+    # 最后，我们看完了
     p_sh = f"curl --location --request POST 'http://dxonline.ruc.edu.cn/index.php?s=/Index/gethours.html' \
         --header 'Accept: */*' --header 'X-Requested-With: XMLHttpRequest' --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) \
             AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36' --header 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' \

@@ -84,7 +84,7 @@ def main():
     endid = args.end
     for _id in range(startid, endid + 1):
         try:
-            pageurl = f"http://dxonline.ruc.edu.cn/index.php?s=/Index/vedio_cont/id/{_id}.html"
+            pageurl = f"pageurl = f"http://dxonline.ruc.edu.cn/index.php?m=Index&a=vedio_cont&id={_id}""
             fuck_one_dk(pageurl)
             print(f"the {pageurl} success!")
         except:

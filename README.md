@@ -8,7 +8,7 @@
 
 ## Preinstallation
 
-Win/Linux/MacOS都ok。
+Linux/MacOS环境下使用。
 
 然后你需要一个**python3**的环境。
 

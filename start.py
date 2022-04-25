@@ -89,7 +89,7 @@ def main():
             print(f"the {pageurl} success!")
         except:
             print(f"error while fucking {pageurl}")
-            traceback.print_exc()
+            # traceback.print_exc()
 
 if __name__ == "__main__":
     main()
